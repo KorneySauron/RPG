@@ -1,0 +1,24 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
+public class GameProcess {
+
+    public static void launch() throws IOException {
+        BufferedReader br=new BufferedReader(new InputStreamReader(System.in));
+        System.out.println(Colors.CYAN + "Привестствую!");
+        System.out.println("Я-твой рассказчик. Так как ты слеп, я помогу тебе ориентироваться, что с тобой происходит");
+        System.out.println("Поведай, как тебя звать?");
+        System.out.println("""
+                1.Сказать свое имя
+                2.\"А кто ты?\"
+                3. Выйти из игры""");
+        int answer= Integer.parseInt(br.readLine());
+        switch (answer){
+            case 1: System.out.print("Меня зовут:");
+            String name= br.readLine();
+            break;
+        }
+    }
+
+}
