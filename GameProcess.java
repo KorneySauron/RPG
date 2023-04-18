@@ -13,17 +13,23 @@ public class GameProcess {
                 1.Сказать свое имя
                 2."А кто ты?"
                 3. Выйти из игры""");
-        int answer = Integer.parseInt(br.readLine());
-        MainCharacter mc = null;
-        while (answer != 1 && answer != 2 && answer != 3) {
-            System.out.println(Colors.RED + "Введите корректное число!"+Colors.RESET);
-            answer = Integer.parseInt(br.readLine());
+        int answer = -1;
+        while (answer < 0 || answer > 3) {
+            try {
+                answer = Integer.parseInt(br.readLine());
+            } catch (NumberFormatException e) {
+                System.err.println("Введите корректное число!");
+            }
+            if (answer > 3) {
+                System.err.println("Введите корректное число!");
+                answer = Integer.parseInt(br.readLine());
+            }
         }
         switch (answer) {
             case 1:
                 System.out.print("Меня зовут:");
                 String name = br.readLine();
-                mc = new MainCharacter(name);
+                MainCharacter mc = new MainCharacter(name);
                 GameProcess.adventureGenerator(mc);
             case 2:
                 System.out.println("Неважно. Важнее кто ты.");
@@ -34,7 +40,8 @@ public class GameProcess {
                 break;
         }
     }
-    public static void adventureGenerator (MainCharacter mc) {
+
+    public static void adventureGenerator(MainCharacter mc) {
 
     }
 }

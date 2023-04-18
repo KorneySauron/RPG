@@ -12,10 +12,20 @@ public class Main {
                 1.Новая игра
                 2.Продолжить
                 3.Выйти из игры""");
-        switch (Integer.parseInt(br.readLine())) {
+        int answer = -1;
+        while (answer < 0 || answer>3) {
+            try {
+                answer = Integer.parseInt(br.readLine());
+            } catch (NumberFormatException e) {
+                System.err.println("Введите корректное число!");
+            }
+            if (answer>3) {
+                System.out.println("Введите корректное число!");
+            }
+        }
+        switch (answer) {
             case 1:
                 GameProcess.launch();
-
                 break;
             case 2:
 
