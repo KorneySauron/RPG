@@ -14,15 +14,14 @@ public class Main {
                 3.Выйти из игры""");
         switch (Integer.parseInt(br.readLine())) {
             case 1:
-                ;
+                GameProcess.launch();
 
                 break;
             case 2:
 
                 break;
             case 3:
-
-                break;
+                return;
         }
     }
 }
