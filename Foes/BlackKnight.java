@@ -1,4 +1,4 @@
 package Foes;
 
-public class BlackKnight {
+public class BlackKnight extends Foe {
 }

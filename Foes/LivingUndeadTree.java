@@ -1,4 +1,4 @@
 package Foes;
 
-public class LivingUndeadTree {
+public class LivingUndeadTree extends Foe{
 }

@@ -1,4 +1,4 @@
 package Foes;
 
-public class GiantSpider {
+public class GiantSpider extends Foe{
 }

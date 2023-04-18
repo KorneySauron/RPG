@@ -1,4 +1,4 @@
 package Foes;
 
-public class UndeadKnight {
+public class UndeadKnight extends Foe{
 }

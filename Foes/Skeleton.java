@@ -1,4 +1,4 @@
 package Foes;
 
-public class Skeleton {
+public class Skeleton extends Foe{
 }
