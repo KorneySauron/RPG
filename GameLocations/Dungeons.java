@@ -1,4 +1,4 @@
 package GameLocations;
 
-public class Dungeons {
+public class Dungeons extends GameLocation{
 }

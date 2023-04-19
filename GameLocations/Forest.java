@@ -1,5 +1,5 @@
 package GameLocations;
 
-public class Forest {
+public class Forest extends GameLocation{
 
 }

@@ -5,8 +5,8 @@ import java.io.InputStreamReader;
 public class Main {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        System.out.println(Colors.BLUE + "Добро пожаловать в игру " + Colors.GREEN + "\"Древние земли\"" + Colors.RESET);
-        System.out.println(Colors.RED + "Чтобы продвигаться дальше, выбирайте доступные вам числа" + Colors.RESET);
+        System.out.println(ColorsAndDirections.BLUE + "Добро пожаловать в игру " + ColorsAndDirections.GREEN + "\"Древние земли\"" + ColorsAndDirections.RESET);
+        System.out.println(ColorsAndDirections.RED + "Чтобы продвигаться дальше, выбирайте доступные вам числа" + ColorsAndDirections.RESET);
         System.out.println("""
                 Выберите действие:
                 1.Новая игра

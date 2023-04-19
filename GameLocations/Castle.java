@@ -1,4 +1,5 @@
 package GameLocations;
 
-public class Castle {
+public class Castle extends GameLocation {
+
 }

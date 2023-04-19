@@ -1,4 +1,7 @@
 package GameLocations;
 
-public class Mountains {
+public class Mountains extends GameLocation{
+    public Mountains(){
+        super();
+    }
 }
