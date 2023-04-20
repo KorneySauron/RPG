@@ -1,3 +1,5 @@
+package Backstage;
+
 import Characters.MainCharacter;
 import GameLocations.AbandonedVillage;
 import GameLocations.Castle;
@@ -10,7 +12,8 @@ import java.io.*;
 import java.util.*;
 
 public class GameProcess {
-    static Map<Integer, GameLocation> locations=new HashMap<>();
+    static Map<Integer, GameLocation> locations = new HashMap<>();
+
     public GameProcess() {
         locations.put(1, new AbandonedVillage());
         locations.put(2, new Castle());
@@ -20,10 +23,9 @@ public class GameProcess {
     }
 
 
-
     public static void launch() throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        System.out.println(ColorsAndDirections.CYAN + "Привестствую!");
+        System.out.println(ImpInstruments.CYAN + "Привестствую!");
         System.out.println("Я-твой рассказчик. Так как ты слеп, я помогу тебе ориентироваться, что с тобой происходит");
         System.out.println("Поведай, как тебя звать?");
         System.out.println("""
@@ -31,17 +33,7 @@ public class GameProcess {
                 2."А кто ты?"
                 3. Выйти из игры""");
         int answer = -1;
-        while (answer < 0 || answer > 3) {
-            try {
-                answer = Integer.parseInt(br.readLine());
-            } catch (NumberFormatException e) {
-                System.err.println("Введите корректное число!");
-            }
-            if (answer > 3) {
-                System.err.println("Введите корректное число!");
-                answer = Integer.parseInt(br.readLine());
-            }
-        }
+        ImpInstruments.guardianCondition(answer, br);
         switch (answer) {
             case 1:
                 System.out.print("Меня зовут:");
@@ -60,30 +52,47 @@ public class GameProcess {
         }
     }
 
-    public static void adventureGenerator(MainCharacter mc, BufferedReader br) throws IOException{
+    public static void adventureGenerator(MainCharacter mc, BufferedReader br) throws IOException {
         System.out.println("Куда пойдем?");
+
         System.out.println("""
                 1.Прямо
                 2.Направо
                 3.Налево
                 4."Не знаю, а куда ты предложишь?"
                 5.Выйти из игры""");
-        int answer=-1;
-        while (answer < 0 || answer>3) {
+        int answer = -1;
+        while (answer < 0 || answer > 3) {
             try {
                 answer = Integer.parseInt(br.readLine());
             } catch (NumberFormatException e) {
                 System.err.println("Введите корректное число!");
             }
-            if (answer>5) {
+            if (answer > 5) {
                 System.out.println("Введите корректное число!");
             }
         }
-        switch (answer){
-            case 1:
-                Random random=new Random();
-                GameLocation location=locations.get(random.nextInt(1,6));
-                mc.meet(location.spawner());
+
+        GameLocation location = locations.get(ImpInstruments.numberGenerator(1, 6));
+        switch (answer) {
+            case 1, 2, 3:
+                System.out.println("Тогда пошли. Приключения зовут!");
+                mc.meet(location.spawner(), location, mc);
+                break;
+            case 4:
+                int offer = ImpInstruments.numberGenerator(1, 4);
+                String direction;
+                if (offer==1){
+                    direction="прямо";
+                } else if (offer==2) {
+                    direction="направо";
+                } else {
+                    direction="налево";
+                }
+                System.out.println("Давай пойдем тогда " + direction);
+                mc.meet(location.spawner(), location, mc);
+            case 5:
+                return;
         }
     }
 }
