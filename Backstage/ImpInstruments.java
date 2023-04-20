@@ -18,14 +18,15 @@ public interface ImpInstruments {
     String RIGHT = "Направо";
     int OFFERED = (int) (Math.random() * 6);
 
-    public static int guardianCondition(int answer, BufferedReader br) throws IOException {
-        while (answer < 0 || answer > 3) {
+    public static int guardianCondition(BufferedReader br, int bounce) throws IOException {
+        int answer=-1;
+        while (answer < 0 || answer > bounce) {
             try {
                 answer = Integer.parseInt(br.readLine());
             } catch (NumberFormatException e) {
                 System.err.println("Введите корректное число!");
             }
-            if (answer > 3) {
+            if (answer > bounce) {
                 System.err.println("Введите корректное число!");
                 answer = Integer.parseInt(br.readLine());
             }
@@ -35,7 +36,6 @@ public interface ImpInstruments {
     }
     public static int numberGenerator(int orig, int bounce){
         Random random=new Random();
-        int genNumber=random.nextInt(orig, bounce);
-        return genNumber;
+        return random.nextInt(orig, bounce);
     }
 }

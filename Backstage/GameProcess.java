@@ -5,8 +5,6 @@ import GameLocations.AbandonedVillage;
 import GameLocations.Castle;
 import GameLocations.GameLocation;
 import GameLocations.Mountains;
-import GameLocations.Dungeons;
-import GameLocations.Forest;
 
 import java.io.*;
 import java.util.*;
@@ -18,8 +16,7 @@ public class GameProcess {
         locations.put(1, new AbandonedVillage());
         locations.put(2, new Castle());
         locations.put(3, new Mountains());
-        locations.put(4, new Forest());
-        locations.put(5, new Dungeons());
+
     }
 
 
@@ -32,20 +29,21 @@ public class GameProcess {
                 1.Сказать свое имя
                 2."А кто ты?"
                 3. Выйти из игры""");
-        int answer = -1;
-        ImpInstruments.guardianCondition(answer, br);
+        int answer = ImpInstruments.guardianCondition(br, 3);
         switch (answer) {
             case 1:
                 System.out.print("Меня зовут:");
                 String name = br.readLine();
                 MainCharacter mc = new MainCharacter(name);
-                System.out.println("Приятно познакомиться! Держи свой клинок, с его помощью ты сможешь защищаться от нелицеприятных жителей этого мира.");
+                System.out.println("Приятно познакомиться, "+name+"! Держи свой клинок, с его помощью ты сможешь защищаться от нелицеприятных жителей этого мира.");
                 System.out.println("И возьми еще щит. Поверь, без него никак. А теперь, вперед за приключениями!");
                 GameProcess.adventureGenerator(mc, br);
             case 2:
                 System.out.println("Неважно. Важнее кто ты.");
                 name = br.readLine();
                 mc = new MainCharacter(name);
+                System.out.println("Приятно познакомиться, "+name+"! Держи свой клинок, с его помощью ты сможешь защищаться от нелицеприятных жителей этого мира.");
+                System.out.println("И возьми еще щит. Поверь, без него никак. А теперь, вперед за приключениями!");
                 GameProcess.adventureGenerator(mc, br);
             case 3:
                 break;
@@ -61,24 +59,21 @@ public class GameProcess {
                 3.Налево
                 4."Не знаю, а куда ты предложишь?"
                 5.Выйти из игры""");
-        int answer = -1;
-        while (answer < 0 || answer > 3) {
-            try {
-                answer = Integer.parseInt(br.readLine());
-            } catch (NumberFormatException e) {
-                System.err.println("Введите корректное число!");
-            }
-            if (answer > 5) {
-                System.out.println("Введите корректное число!");
-            }
-        }
+        int answer=ImpInstruments.guardianCondition(br,5);
 
-        GameLocation location = locations.get(ImpInstruments.numberGenerator(1, 6));
+//        int numberOfLoc=ImpInstruments.numberGenerator(1,4);
+//        GameLocation location;
+//        if (numberOfLoc==1){
+            Castle location=new Castle();
+//        } else if (numberOfLoc==2){
+//            location=new AbandonedVillage();
+//        } else {
+//            location=new Mountains();
+//        }
         switch (answer) {
             case 1, 2, 3:
                 System.out.println("Тогда пошли. Приключения зовут!");
-                mc.meet(location.spawner(), location, mc);
-                break;
+                MainCharacter.meet(location.spawner(), location, mc);
             case 4:
                 int offer = ImpInstruments.numberGenerator(1, 4);
                 String direction;
@@ -90,7 +85,7 @@ public class GameProcess {
                     direction="налево";
                 }
                 System.out.println("Давай пойдем тогда " + direction);
-                mc.meet(location.spawner(), location, mc);
+                MainCharacter.meet(location.spawner(), location, mc);
             case 5:
                 return;
         }

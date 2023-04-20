@@ -7,6 +7,12 @@ import java.util.Random;
 
 public class AbandonedVillage extends GameLocation {
     String name="ДЕРЕВНЯ";
+    String monsters="Скелеты";
+    @Override
+    public String getMonsters() {
+        return monsters;
+    }
+
     public AbandonedVillage() {
         super();
     }
