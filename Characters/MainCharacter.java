@@ -57,7 +57,7 @@ public class MainCharacter {
     public static void battle(ArrayList foes, MainCharacter mc) throws IOException {
         System.out.println(ImpInstruments.RED + "*НАЧАЛСЯ БОЙ*");
         for (int i = 0; i < foes.size(); i++) {
-            fight((UndeadKnight) foes.get(i), mc);
+            fight((UndeadKnight) foes.get(i), mc, foes);
             if (i==foes.size()){
                 System.out.println("Отлично! Мы их одолели! Можем идти дальше!");
                 GameProcess.adventureGenerator(mc,br);
@@ -65,24 +65,25 @@ public class MainCharacter {
         }
     }
 
-    public static void fight(UndeadKnight foe, MainCharacter mc) throws IOException {
+    public static void fight(UndeadKnight foe, MainCharacter mc, ArrayList foes) throws IOException {
         System.out.println("Перед тобой стоит " + foe.getType() + " с " + foe.getHealth() + " здоровья");
         System.out.println("Что ты будешь делать?");
-        System.out.println("""
-                1.Атаковать
-                2.Уклониться
-                3.Блокировать
-                4."Сколько у меня здоровья?!"
-                """);
-        int action = ImpInstruments.guardianCondition(br, 4);
+        System.out.println("1.Атаковать");
+//                2.Уклониться
+//                3.Блокировать
+                System.out.println("2.Сколько у меня здоровья?!");
+        int action = ImpInstruments.guardianCondition(br, 3);
         switch (action) {
             case 1:
                 int damage = ImpInstruments.numberGenerator(5, 11);
                 foe.setHealth(foe.getHealth() - damage);
-                if (foe.getHealth() == 0) {
-                    System.out.println(foe.getType() + "повержен!"+ImpInstruments.RESET);
+                if (foe.getHealth() <= 0) {
+                    System.out.println(foe.getType() + " повержен!"+ImpInstruments.RESET);
+                    foe.setAlive(foe);
+                    foes.remove(0);
+                    battle(foes,mc);
                 } else {
-                    fight(foe, mc);
+                    fight(foe, mc, foes);
                 }
 //            case 2:
 //                int result = ImpInstruments.numberGenerator(0, 2);
@@ -109,9 +110,9 @@ public class MainCharacter {
 //                    System.out.println("Харош!");
 //                    fight(foe, mc);
 //                }
-            case 4:
+            case 2:
                 System.out.println("У тебя " + mc.getHealth()+ "здоровья!");
-                fight(foe, mc);
+                fight(foe, mc, foes);
         }
     }
 }

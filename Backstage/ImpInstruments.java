@@ -25,6 +25,7 @@ public interface ImpInstruments {
                 answer = Integer.parseInt(br.readLine());
             } catch (NumberFormatException e) {
                 System.err.println("Введите корректное число!");
+                answer=Integer.parseInt(br.readLine());
             }
             if (answer > bounce) {
                 System.err.println("Введите корректное число!");

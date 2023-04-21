@@ -29,7 +29,7 @@ public class GameProcess {
                 1.Сказать свое имя
                 2."А кто ты?"
                 3. Выйти из игры""");
-        int answer = ImpInstruments.guardianCondition(br, 3);
+        int answer = ImpInstruments.guardianCondition(br, 4);
         switch (answer) {
             case 1:
                 System.out.print("Меня зовут:");
